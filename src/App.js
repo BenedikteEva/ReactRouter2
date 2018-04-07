@@ -20,7 +20,7 @@ function Company() {
     </div>);
 
 }
-https://github.com/BenedikteEva/ReactRouter2.git
+
 
 class AddBook extends Component {
 
@@ -75,10 +75,10 @@ class AddBook extends Component {
 }
 
 function Details(props) {
-
+console.log(props)
   let id = props.match.params.id;
   let defualt = "“Book details for selected book will go here”"
-  const book = BookStore.findBook(id - 1);
+  const book = BookStore.findBook(id-1);
   let element = { "Detailed info for the title": book.title, "ID": book.id, "Info": book.info }
 
   if (props.counter===0) {
@@ -88,23 +88,38 @@ function Details(props) {
   }
   else {
     return (
-      <table><tr><td>Detailed info for the title: {book.title}</td></tr>
+      <form>
+      <table>
+        
+        <tr><td>Detailed info for the title: {book.title}</td></tr>
         <tr><td>ID:   {book.id}</td></tr>
-        <tr><td>Info: {book.info}</td></tr></table>
-
+        <tr><td>Info: {book.info}</td></tr>
+        <tr><td> <input type="submit" value="Delete" onClick={DeleteBook}{...book}/></td></tr>
+        
+       </table>
+</form>
     )
   }
 }
+// delete funktionen virker ikke så godt 
+function DeleteBook(props){
+  BookStore.deleteBook(props)
+  alert("you deleted book with id: "+props.id)
+  Product
+
+}
+
 //Embarrasing solution only works once
 var counter=0;
 /* Products component */
+
 const Product = ({ data }) => {
 
   const bookList = data.map(book => {
 
     return (
 
-      <ul key={book.id}>
+      <ul key={data.id}>
         <li> {book.title}   <Link to={`/product/${book.id}`} >details</Link></li>
       </ul>
 
@@ -193,3 +208,4 @@ class App extends Component {
 }
 
 export default App;
+// https://github.com/BenedikteEva/ReactRouter2.git
